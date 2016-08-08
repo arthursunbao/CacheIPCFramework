@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/IPCFramework.iml" filepath="$PROJECT_DIR$/IPCFramework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CacheIPCFramework.iml" filepath="$PROJECT_DIR$/CacheIPCFramework.iml" />
     </modules>
   </component>
 </project>
