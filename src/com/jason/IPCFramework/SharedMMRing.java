@@ -2,6 +2,7 @@ package com.jason.IPCFramework;
 
 /**
  * Created by baosun on 8/8/2016.
+ * Primary Class for the RingBuffer Structure
  */
 public class SharedMMRing {
 
@@ -11,7 +12,7 @@ public class SharedMMRing {
 
     public static final byte FLAG_NO_NEXT = 0B0001;
     public static final byte FLAG_NEXT_ADJACENT = 0B0010;
-    public static final byte MASK_NEXT_REWIND = 0B0100;
+    public static final byte FLAG_NEXT_REWIND = 0B0100;
     public static final byte MASK_NEXT_EXTEND_RING = 0B0101;
     public static final byte MASK_NEXT_BLOCK = 0B0110;
     public static final int MSG_PADDING_LENGTH = 2 + 1;
@@ -82,7 +83,6 @@ public class SharedMMRing {
             if (!mm.compareAndSwapLong(getWriteIndexPos(), writeStartPos, writeStartPos + dataRealLen)) {
                 return 1;
             }
-
             writeMsg(writeStartPos, rawMsg);
             mm.putByteVolatile(writeStartPos - 1, FLAG_NEXT_ADJACENT);
             return 0;
@@ -105,15 +105,15 @@ public class SharedMMRing {
             if(writeStartPos + dataRealLen <=this.getEndPos()){
                 if(!mm.compareAndSwapLong(getWriteIndexPos(),writeStartPos,writeStartPos+dataRealLen)){
                     return 1;
-                };
+                }
                 this.writeMsg(writeStartPos,rawMsg);
-                mm.putByteVolatile(writeStartPos - 1; FLAG_NEXT_ADJACENT);
+                mm.putByteVolatile(writeStartPos - 1, FLAG_NEXT_ADJACENT);
                 return 0;
             }
             else{
                 if(mm.compareAndSwapLong(getWriteIndexPos(),writeStartPos, this.getStartPos()+1)){
                     mm.putByte(this.getStartPos(), FLAG_NO_NEXT);
-                    mm.putByteVolatile(writeStartPos - 1, MASK_NEXT_REWIND);
+                    mm.putByteVolatile(writeStartPos - 1, FLAG_NEXT_REWIND);
                 }
                 return tryReWindWrite(rawMsg);
 
@@ -146,7 +146,7 @@ public class SharedMMRing {
             return null;
         }
         byte[] msg = new byte[dataLength];
-        mm.getBytes(nextDataStartAddr, msg, 0, dataLength);
+        mm.BytesCopy(nextDataStartAddr, msg, 0, dataLength);
         return msg;
     }
 
@@ -177,9 +177,5 @@ public class SharedMMRing {
         }
         return msg;
     }
-
-
-
-
 
 }
