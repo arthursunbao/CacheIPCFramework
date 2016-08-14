@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/IPCFramework.iml" filepath="$PROJECT_DIR$/IPCFramework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/com.jason.java.cacheipcframework.iml" filepath="$PROJECT_DIR$/src/com.jason.java.cacheipcframework.iml" />
     </modules>
   </component>
 </project>

@@ -74,7 +74,7 @@ public class QueueMeta {
 
     @Override
     public String toString() {
-        return "QueueMeta [groupId=" + groupId + ", rawLenth=" + rawLenth + ", addr=" + addr + ", storageType="
+        return "QueueMeta [groupId=" + groupId + ", rawLenth=" + rawLength + ", addr=" + addr + ", storageType="
                 + storageType + "]";
     }
 
