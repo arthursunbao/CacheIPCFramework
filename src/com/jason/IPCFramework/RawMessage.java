@@ -9,7 +9,7 @@ public class RawMessage {
     private byte[] rawData;
     private byte[] dataFlag;
 
-    public RawMessage{
+    public RawMessage(){
 
     }
 
@@ -22,7 +22,6 @@ public class RawMessage {
     }
 
     public RawMessage(byte[] rawData){
-        super();
         this.rawData = rawData;
         this.msgLength = (short)rawData.length;
     }
